@@ -1,0 +1,16 @@
+{
+    "editor.tabSize": 2,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true
+    },
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifier": "non-relative"
+    // "editor.formatOnSave": false,
+    // "[javascript]": {
+    //   "editor.defaultFormatter": null
+    // },
+    // "[typescript]": {
+    //   "editor.defaultFormatter": null
+    // }
+  }
