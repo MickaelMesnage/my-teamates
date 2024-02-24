@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { urls } from "@/urls";
 import Link from "next/link";
+import { Shell } from "@/components/atoms/Shell";
 
 export default function RootLayout({
   children,
@@ -29,7 +30,9 @@ export default function RootLayout({
           ))}
         </ul>
       </header>
-      <main className="w-full h-[calc(100%-4rem)]">{children}</main>
+      <main className="w-full h-[calc(100%-4rem)]">
+        <Shell>{children}</Shell>
+      </main>
     </div>
   );
 }
