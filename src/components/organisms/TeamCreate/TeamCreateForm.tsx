@@ -1,5 +1,6 @@
 "use client";
 
+import { SubmitButton } from "@/components/molecules/SubmitButton";
 import { teamCreateAction } from "@/components/organisms/TeamCreate/TeamCreateAction";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
@@ -18,9 +19,7 @@ export const TeamCreateForm = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button disabled={pending} type="submit">
-        Create
-      </button>
+      <SubmitButton>Create</SubmitButton>
       {pending && <p>Creating...</p>}
     </form>
   );

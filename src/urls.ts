@@ -6,4 +6,10 @@ export const urls = {
     // view: (id: string) => `/teams/${id}`,
     // edit: (id: string) => `/teams/${id}/edit`,
   },
+  games: {
+    list: "/games",
+    create: "/games/create",
+    // view: (id: string) => `/games/${id}`,
+    // edit: (id: string) => `/games/${id}/edit`,
+  },
 };

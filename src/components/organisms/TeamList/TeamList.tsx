@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export const TeamList = async () => {
   const teamList = await prisma.team.findMany();
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   return (
     <div>
