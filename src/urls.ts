@@ -1,5 +1,6 @@
 export const urls = {
   home: "/",
+  signin: "/signin",
   teams: {
     list: "/teams",
     create: "/teams/create",

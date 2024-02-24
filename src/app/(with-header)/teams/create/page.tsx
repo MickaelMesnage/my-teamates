@@ -1,9 +1,12 @@
+import { Shell } from "@/components/atoms/Shell";
 import { TeamCreateForm } from "@/components/organisms/TeamCreate/TeamCreateForm";
 
 export default function Page() {
   return (
     <main>
-      <TeamCreateForm />
+      <Shell>
+        <TeamCreateForm />
+      </Shell>
     </main>
   );
 }
