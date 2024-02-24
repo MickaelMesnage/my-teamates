@@ -1,3 +1,5 @@
+import { SignoutButton } from "@/components/organisms/SigninButton/SigninButton";
+import { auth } from "@/lib/auth";
 import { urls } from "@/urls";
 import Link from "next/link";
 import { ComponentProps } from "react";
@@ -5,12 +7,16 @@ import { twMerge } from "tailwind-merge";
 
 type HeaderProps = Omit<ComponentProps<"header">, "children">;
 
-export const Header = ({ className, ...rest }: HeaderProps) => {
-  const LINKS = [
-    { href: urls.home, label: "Accueil" },
-    { href: urls.teams.list, label: "Equipes" },
-    { href: urls.games.list, label: "Matchs" },
-  ];
+export const Header = async ({ className, ...rest }: HeaderProps) => {
+  const session = await auth();
+  const isLogged = !!session;
+
+  const LINKS = [{ href: urls.home, label: "Accueil" }];
+
+  if (isLogged) {
+    LINKS.push({ href: urls.teams.list, label: "Equipes" });
+    LINKS.push({ href: urls.games.list, label: "Matchs" });
+  }
 
   return (
     <header
@@ -29,7 +35,14 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
           </li>
         ))}
       </ul>
-      <Link href={urls.signin}>Signin</Link>
+      {isLogged ? (
+        <>
+          <span>{session.user?.email}</span>
+          <SignoutButton />
+        </>
+      ) : (
+        <Link href={urls.signin}>Signin</Link>
+      )}
     </header>
   );
 };

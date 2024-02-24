@@ -1,4 +1,4 @@
-import { SigninButton } from "@/components/organisms/SigninButton/SigninButton";
+import { SigninButton } from "@/components/organisms/SignoutButton/SigninButton";
 
 export default function Page() {
   return (
