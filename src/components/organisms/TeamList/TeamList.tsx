@@ -1,3 +1,4 @@
+import { TeamDeleteButton } from "@/components/organisms/TeamDeleteButton/TeamDeleteButton";
 import { prisma } from "@/lib/prisma";
 
 export const TeamList = async () => {
@@ -9,7 +10,10 @@ export const TeamList = async () => {
       <h1>Team List</h1>
       <ul>
         {teamList.map((team) => (
-          <li key={team.id}>{team.name}</li>
+          <>
+            <li key={team.id}>{team.name}</li>
+            <TeamDeleteButton teamId={team.id} />
+          </>
         ))}
       </ul>
     </div>
