@@ -20,6 +20,17 @@ export const { auth, handlers } = NextAuth({
   ],
 });
 
+export const getAuthSession = () => auth();
+
+export const getRequiredAuthSession = () => {
+  const session = getAuthSession();
+
+  if (!session) {
+    throw new Error("getRequiredAuthSession: Session not found");
+  }
+  return session;
+};
+
 // export const getAuthSession = () => {
 //   return getServerSession(authConfig);
 // };

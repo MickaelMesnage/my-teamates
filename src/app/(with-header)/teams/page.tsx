@@ -2,6 +2,7 @@ import { Section } from "@/components/atoms/Section";
 import { Shell } from "@/components/atoms/Shell";
 import { TeamCreateButton } from "@/components/organisms/TeamCreateButton/TeamCreateButton";
 import { TeamList } from "@/components/organisms/TeamList/TeamList";
+
 import { Suspense } from "react";
 
 export default function Page() {

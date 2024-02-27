@@ -1,13 +1,21 @@
 "use server";
 
+import { authGuard } from "@/guards/authGuard";
 import { prisma } from "@/lib/prisma";
 import { urls } from "@/urls";
 import { redirect } from "next/navigation";
 
 export async function teamCreateAction(formData: FormData) {
+  const user = await authGuard();
+
+  const name = formData.get("name") as string;
+
   await prisma.team.create({
     data: {
-      name: formData.get("name") as string,
+      name,
+      members: {
+        connect: [{ id: user.id }],
+      },
     },
   });
 
