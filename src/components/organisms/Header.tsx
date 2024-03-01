@@ -1,5 +1,5 @@
-import { SignoutButton } from "@/components/organisms/SigninButton/SigninButton";
-import { auth } from "@/lib/auth";
+import { SignoutButton } from "@/components/organisms/SignoutButton/SignoutButton";
+import { auth, getAuthSession } from "@/lib/auth";
 import { urls } from "@/urls";
 import Link from "next/link";
 import { ComponentProps } from "react";
@@ -8,7 +8,8 @@ import { twMerge } from "tailwind-merge";
 type HeaderProps = Omit<ComponentProps<"header">, "children">;
 
 export const Header = async ({ className, ...rest }: HeaderProps) => {
-  const session = await auth();
+  const session = await getAuthSession();
+  console.log({ session });
   const isLogged = !!session;
 
   const LINKS = [{ href: urls.home, label: "Accueil" }];

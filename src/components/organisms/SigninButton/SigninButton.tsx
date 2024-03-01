@@ -1,11 +1,11 @@
 "use client";
 
-import { signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
-export const SignoutButton = () => {
-  const onSignout = async () => {
-    signOut();
+export const SigninButton = () => {
+  const onSignin = async () => {
+    signIn();
   };
 
-  return <button onClick={onSignout}>Logout</button>;
+  return <button onClick={onSignin}>Login</button>;
 };
