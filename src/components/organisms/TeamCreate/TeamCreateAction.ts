@@ -2,7 +2,7 @@
 
 import { authGuard } from "@/guards/authGuard";
 import { prisma } from "@/lib/prisma";
-import { urls } from "@/urls";
+import { URLS } from "@/urls";
 import { redirect } from "next/navigation";
 
 export async function teamCreateAction(formData: FormData) {
@@ -21,5 +21,5 @@ export async function teamCreateAction(formData: FormData) {
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  redirect(urls.teams.list);
+  redirect(URLS.teamsList);
 }

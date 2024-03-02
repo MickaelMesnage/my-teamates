@@ -1,5 +1,5 @@
 import { Shell } from "@/components/atoms/Shell";
-import { urls } from "@/urls";
+import { URLS } from "@/urls";
 import Link from "next/link";
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
         Home
         <ul>
           <li>
-            <Link href={urls.teams.list}>Teams</Link>
+            <Link href={URLS.teamsList}>Teams</Link>
           </li>
         </ul>
       </Shell>

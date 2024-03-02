@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { urls } from "@/urls";
+import { URLS } from "@/urls";
 import { revalidatePath } from "next/cache";
 
 export async function teamDeleteAction(userId: string) {
@@ -13,5 +13,5 @@ export async function teamDeleteAction(userId: string) {
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  revalidatePath(urls.teams.list);
+  revalidatePath(URLS.teamsList);
 }

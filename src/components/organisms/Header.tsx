@@ -1,6 +1,6 @@
 import { SignoutButton } from "@/components/organisms/SignoutButton/SignoutButton";
 import { auth, getAuthSession } from "@/lib/auth";
-import { urls } from "@/urls";
+import { URLS } from "@/urls";
 import Link from "next/link";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
@@ -11,11 +11,11 @@ export const Header = async ({ className, ...rest }: HeaderProps) => {
   const session = await getAuthSession();
   const isLogged = !!session;
 
-  const LINKS = [{ href: urls.home, label: "Accueil" }];
+  const LINKS = [{ href: URLS.home, label: "Accueil" }];
 
   if (isLogged) {
-    LINKS.push({ href: urls.teams.list, label: "Equipes" });
-    LINKS.push({ href: urls.games.list, label: "Matchs" });
+    LINKS.push({ href: URLS.teamsList, label: "Equipes" });
+    LINKS.push({ href: URLS.gamesList, label: "Matchs" });
   }
 
   return (
@@ -41,7 +41,7 @@ export const Header = async ({ className, ...rest }: HeaderProps) => {
           <SignoutButton />
         </>
       ) : (
-        <Link href={urls.signin}>Signin</Link>
+        <Link href={URLS.signin}>Signin</Link>
       )}
     </header>
   );

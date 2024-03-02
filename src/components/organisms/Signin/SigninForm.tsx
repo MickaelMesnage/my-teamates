@@ -2,7 +2,7 @@
 
 import { SubmitButton } from "@/components/molecules/SubmitButton";
 import { getAuthSession } from "@/lib/auth";
-import { urls } from "@/urls";
+import { URLS } from "@/urls";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
