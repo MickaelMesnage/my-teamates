@@ -36,8 +36,6 @@ export const SigninForm = () => {
   const onSubmit = (data: SigninFormFieldValues) => {
     startTransition(async () => {
       await signIn("credentials", { ...data });
-      console.log("redirecting to", urls.home);
-      router.push(urls.home);
     });
   };
 

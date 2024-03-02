@@ -51,7 +51,7 @@ export const { auth, handlers } = NextAuth({
           return null;
         }
 
-        console.log("CredentialsProvider: User found", user);
+        // console.log("CredentialsProvider: User found", user);
 
         return user;
       },

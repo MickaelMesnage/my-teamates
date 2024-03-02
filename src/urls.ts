@@ -1,5 +1,5 @@
 export const urls = {
-  home: "/",
+  home: "/home",
   signin: "/signin",
   signup: "/signup",
   teams: {

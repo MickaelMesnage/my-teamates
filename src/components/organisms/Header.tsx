@@ -9,7 +9,6 @@ type HeaderProps = Omit<ComponentProps<"header">, "children">;
 
 export const Header = async ({ className, ...rest }: HeaderProps) => {
   const session = await getAuthSession();
-  console.log({ session });
   const isLogged = !!session;
 
   const LINKS = [{ href: urls.home, label: "Accueil" }];
