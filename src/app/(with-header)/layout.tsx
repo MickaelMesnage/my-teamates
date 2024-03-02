@@ -1,5 +1,5 @@
 import { Shell } from "@/components/atoms/Shell";
-import { Header } from "@/components/organisms/Header";
+import { Header } from "@/components/organisms/Header/Header";
 
 export default function RootLayout({
   children,

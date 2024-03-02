@@ -1,6 +1,16 @@
+import { ProfileDropdown } from "@/components/organisms/Header/ProfileDropdown";
 import { SignoutButton } from "@/components/organisms/SignoutButton/SignoutButton";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 import { auth, getAuthSession } from "@/lib/auth";
+import { ProfileIcon } from "@/svgs/ProfileIcon";
 import { URLS } from "@/urls";
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
@@ -37,8 +47,9 @@ export const Header = async ({ className, ...rest }: HeaderProps) => {
       </ul>
       {isLogged ? (
         <>
-          <span>{session.user?.email}</span>
-          <SignoutButton />
+          <ProfileDropdown session={session} />
+          {/* <span>{session.user?.email}</span>
+          <SignoutButton /> */}
         </>
       ) : (
         <Link href={URLS.signin}>Signin</Link>
