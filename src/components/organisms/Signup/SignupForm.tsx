@@ -1,10 +1,12 @@
 "use client";
 
-import { SubmitButton } from "@/components/molecules/SubmitButton";
+import { Button } from "@/components/atoms/Button";
+import { FormField } from "@/components/atoms/FormField";
+import { Input } from "@/components/atoms/Input";
 import { signupAction } from "@/components/organisms/Signup/SignupAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
@@ -54,45 +56,119 @@ export const SignupForm = () => {
     });
   };
 
-  const { handleSubmit, register } = methods;
+  const { handleSubmit, control } = methods;
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        autoComplete="email"
-        {...register("email")}
+      <Controller
+        control={control}
+        name="email"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Email</FormField.Label>
+            <Input
+              id={name}
+              type="email"
+              autoComplete="email"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <label htmlFor="firstName">Prénom</label>
-      <input
-        id="firstName"
-        type="text"
-        autoComplete="given-name"
-        {...register("firstName")}
+      <Controller
+        control={control}
+        name="firstName"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Prénom</FormField.Label>
+            <Input
+              id={name}
+              type="text"
+              autoComplete="given-name"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <label htmlFor="firstName">Nom</label>
-      <input
-        id="firstName"
-        type="text"
-        autoComplete="family-name"
-        {...register("lastName")}
+      <Controller
+        control={control}
+        name="lastName"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Nom</FormField.Label>
+            <Input
+              id={name}
+              type="text"
+              autoComplete="family-name"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <label htmlFor="password">Mot de passe</label>
-      <input
-        id="password"
-        type="text"
-        autoComplete="new-password"
-        {...register("password")}
+      <Controller
+        control={control}
+        name="password"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Mot de passe</FormField.Label>
+            <Input
+              id={name}
+              type="password"
+              value={value}
+              autoComplete="new-password"
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <label htmlFor="confirmPassword">Confirmations mot de passe</label>
-      <input
-        id="confirmPassword"
-        type="text"
-        {...register("confirmPassword")}
+      <Controller
+        control={control}
+        name="confirmPassword"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>
+              Confirmation mot de passe
+            </FormField.Label>
+            <Input
+              id={name}
+              type="password"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <SubmitButton>Create</SubmitButton>
+      <Button type="submit" isLoading={isPending}>
+        S&apos;inscrire
+      </Button>
     </form>
   );
 };

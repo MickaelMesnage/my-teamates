@@ -1,4 +1,4 @@
-import { SignoutButton } from "@/components/organisms/SignoutButton/SignoutButton";
+import { SignoutButton } from "@/components/organisms/Signout/SignoutButton";
 import { auth, getAuthSession } from "@/lib/auth";
 import { URLS } from "@/urls";
 import Link from "next/link";
