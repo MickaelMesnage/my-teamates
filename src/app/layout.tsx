@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { twMerge } from "tailwind-merge";
+import { ToasterProvider } from "@/providers/ToasterProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={twMerge(inter.className, "w-screen h-screen")}>
         {children}
+        <ToasterProvider />
       </body>
     </html>
   );

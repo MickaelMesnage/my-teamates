@@ -48,10 +48,8 @@ export const { auth, handlers } = NextAuth({
           user && (await verifyPassword(user.password, password));
 
         if (!isPasswordValid) {
-          return null;
+          throw new Error("CredentialsProvider: Error validating password");
         }
-
-        // console.log("CredentialsProvider: User found", user);
 
         return user;
       },

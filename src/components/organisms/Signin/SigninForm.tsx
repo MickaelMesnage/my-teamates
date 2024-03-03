@@ -3,8 +3,11 @@
 import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/atoms/FormField";
 import { Input } from "@/components/atoms/Input";
+import { useToaster } from "@/hooks/useToaster";
+import { URLS } from "@/urls";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,7 +27,9 @@ const DEFAULT_VALUES = {
 } satisfies SigninFormFieldValues;
 
 export const SigninForm = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const { toastError } = useToaster();
 
   const methods = useForm<SigninFormFieldValues>({
     resolver: zodResolver(signinFormZodSchema),
@@ -34,9 +39,16 @@ export const SigninForm = () => {
   const onSubmit = async (data: SigninFormFieldValues) => {
     startTransition(async () => {
       try {
-        await signIn("credentials", { ...data });
+        const response = await signIn("credentials", {
+          ...data,
+          redirect: false,
+        });
+        if (response?.error) {
+          throw new Error("SigninForm onSubmit: Callback error");
+        }
+        router.push(URLS.home);
       } catch (error) {
-        console.error(error);
+        toastError("Erreur lors de la connexion");
       }
     });
   };
