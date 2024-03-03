@@ -1,7 +1,7 @@
 "use client";
 
 import { SubmitButton } from "@/components/molecules/SubmitButton";
-import { teamCreateAction } from "@/components/organisms/TeamCreate/TeamCreateAction";
+import { teamCreateAction } from "@/components/organisms/Team/TeamCreate/TeamCreateAction";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 

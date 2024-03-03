@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const TeamCreateButton = () => {
   return (
-    <Link href={URLS.teams.create} passHref>
+    <Link href={URLS.teamsCreate} passHref>
       <button>Create Team</button>
     </Link>
   );
