@@ -31,3 +31,10 @@ body {
     text-wrap: balance;
   }
 } */
+
+
+@layer components {
+  .outline-focus-primary {
+    @apply focus:outline-none focus:ring-1 focus:ring-gray-400;
+  }
+}

@@ -1,13 +1,12 @@
 "use client";
 
-import { SubmitButton } from "@/components/molecules/SubmitButton";
-import { getAuthSession } from "@/lib/auth";
-import { URLS } from "@/urls";
+import { Button } from "@/components/atoms/Button";
+import { FormField } from "@/components/atoms/FormField";
+import { Input } from "@/components/atoms/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
@@ -25,7 +24,6 @@ const DEFAULT_VALUES = {
 } satisfies SigninFormFieldValues;
 
 export const SigninForm = () => {
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const methods = useForm<SigninFormFieldValues>({
@@ -33,31 +31,65 @@ export const SigninForm = () => {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const onSubmit = (data: SigninFormFieldValues) => {
+  const onSubmit = async (data: SigninFormFieldValues) => {
     startTransition(async () => {
-      await signIn("credentials", { ...data });
+      try {
+        await signIn("credentials", { ...data });
+      } catch (error) {
+        console.error(error);
+      }
     });
   };
 
-  const { handleSubmit, register } = methods;
+  const { handleSubmit, control } = methods;
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        autoComplete="email"
-        {...register("email")}
+      <Controller
+        control={control}
+        name="email"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Email</FormField.Label>
+            <Input
+              id={name}
+              type="email"
+              autoComplete="email"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <label htmlFor="password">Mot de passe</label>
-      <input
-        id="password"
-        type="text"
-        autoComplete="new-password"
-        {...register("password")}
+      <Controller
+        control={control}
+        name="password"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Mot de passe</FormField.Label>
+            <Input
+              id={name}
+              type="password"
+              autoComplete="new-password"
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
       />
-      <SubmitButton>Se connecter</SubmitButton>
+      <Button type="submit" isLoading={isPending}>
+        Se connecter
+      </Button>
     </form>
   );
 };

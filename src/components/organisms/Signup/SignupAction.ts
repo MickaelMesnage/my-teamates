@@ -1,8 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { hashPassword } from "@/lib/utils/password";
 import { URLS } from "@/urls";
-import { hashPassword } from "@/utils/hash";
 import { redirect } from "next/navigation";
 
 export async function signupAction(formData: FormData) {
