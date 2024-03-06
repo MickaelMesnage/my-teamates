@@ -59,32 +59,28 @@ export const { auth, handlers } = NextAuth({
       clientSecret: githubSecret,
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+  },
   session: {
     // Set to jwt in order to CredentialsProvider works properly
     strategy: "jwt",
   },
 });
 
-export const getAuthSession = () => auth();
+export const getAuthSession = async () => await auth();
 
-export const getRequiredAuthSession = () => {
-  const session = getAuthSession();
+export const getRequiredAuthSession = async () => {
+  const session = await getAuthSession();
 
   if (!session) {
     throw new Error("getRequiredAuthSession: Session not found");
   }
+
   return session;
 };
-
-// export const getAuthSession = () => {
-//   return getServerSession(authConfig);
-// };
-
-// export const getRequiredAuthSession = () => {
-//   const session = getAuthSession();
-
-//   if (!session) {
-//     throw new Error("getRequiredAuthSession: Session not found");
-//   }
-//   return session;
-// };

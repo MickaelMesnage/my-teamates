@@ -13,17 +13,11 @@ export const TeamList = async () => {
     },
   });
 
-  console.log({
-    teamList,
-  });
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  teamList.map((team) => {});
   return (
     <ul>
       {teamList.map((team) => (
-        <>
-          <li key={team.id}>
+        <div key={team.id}>
+          <li>
             <span>{team.name}</span>
             {team.members.map((member) => (
               <img
@@ -34,7 +28,7 @@ export const TeamList = async () => {
             ))}
           </li>
           <TeamDeleteButton teamId={team.id} />
-        </>
+        </div>
       ))}
     </ul>
   );

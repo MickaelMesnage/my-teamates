@@ -11,7 +11,5 @@ export async function teamDeleteAction(userId: string) {
     },
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   revalidatePath(URLS.teamsList);
 }

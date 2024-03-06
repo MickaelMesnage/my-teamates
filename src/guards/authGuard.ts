@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { getSession } from "next-auth/react";
 
 export const authGuard = async () => {
   const session = await auth();
@@ -12,4 +13,14 @@ export const authGuard = async () => {
   }
 
   return session.user;
+};
+
+export const authSessionGuard = async () => {
+  const session = await getSession();
+
+  if (!session) {
+    throw new Error("authGuard: Session not found");
+  }
+
+  return session;
 };

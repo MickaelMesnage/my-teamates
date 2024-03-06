@@ -41,17 +41,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  password      String?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  teams         Team[]    @relation("UserTeams")
-
-  // teams         UserTeam[]
+  id                 String    @id @default(cuid())
+  name               String?
+  email              String?   @unique
+  emailVerified      DateTime?
+  password           String?
+  image              String?
+  accounts           Account[]
+  sessions           Session[]
+  teams              Team[]    @relation("UsersTeams")
+  administrableTeams Team[]
+  games              Game[]
 }
 
 model VerificationToken {
@@ -67,15 +67,17 @@ model Team {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
-  // members   UserTeam[]
-  members   User[]   @relation("UserTeams")
+  admin     User     @relation(fields: [adminId], references: [id])
+  adminId   String
+  members   User[]   @relation("UsersTeams")
+  games     Game[]
 }
 
-// model UserTeam {
-//   userId String
-//   teamId String
-//   user   User   @relation(fields: [userId], references: [id])
-//   team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
-
-//   @@id([userId, teamId])
-// }
+model Game {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  UsersGames User[]
+  team       Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId     String
+}
