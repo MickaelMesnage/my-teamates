@@ -5,7 +5,7 @@ import { FormField } from "@/components/atoms/FormField";
 import { Input } from "@/components/atoms/Input";
 import { teamCreateAction } from "@/components/organisms/Team/TeamCreate/TeamCreateAction";
 import { useToaster } from "@/hooks/useToaster";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -40,7 +40,7 @@ export const TeamCreateForm = () => {
 
         await teamCreateAction(formData);
 
-        router.push(URLS.teamsList);
+        router.push(PAGES.teams.list.url);
       } catch (error) {
         toastError("Erreur lors de la création de l'équipe");
       }

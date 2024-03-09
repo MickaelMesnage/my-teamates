@@ -5,9 +5,11 @@ export default function Page({
   params,
 }: {
   params: {
-    gameId: string;
+    teamId: string;
   };
 }) {
+  const { teamId } = params;
+
   return (
     <main>
       <Shell>

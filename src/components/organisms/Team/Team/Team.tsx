@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 type TeamProps = {
@@ -16,24 +17,32 @@ export const Team = async ({ teamId }: TeamProps) => {
         select: {
           image: true,
           id: true,
+          name: true,
         },
       },
     },
   });
 
   if (!team) {
-    redirect(URLS.teamsList);
+    redirect(PAGES.teams.list.url);
   }
 
   return (
     <div>
       <span>{team.name}</span>
       {team.members.map((member) => (
-        <img
-          className="size-12 rounded-full"
-          key={member.id}
-          src={member.image || undefined}
-        />
+        <>
+          {member.image && (
+            <Image
+              width={50}
+              height={50}
+              alt={`profile picture of ${member.name}`}
+              className="size-12 rounded-full"
+              key={member.id}
+              src={member.image}
+            />
+          )}
+        </>
       ))}
     </div>
   );

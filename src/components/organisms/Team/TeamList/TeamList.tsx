@@ -1,33 +1,36 @@
-import { TeamDeleteButton } from "@/components/organisms/Team/TeamDelete/TeamDeleteButton";
+import { TeamListCard } from "@/components/organisms/Team/TeamList/TeamListCard";
+import { getRequiredUser } from "@/lib/getRequiredUser";
 import { prisma } from "@/lib/prisma";
 
 export const TeamList = async () => {
+  const user = await getRequiredUser();
+
   const teamList = await prisma.team.findMany({
     include: {
       members: {
         select: {
           image: true,
           id: true,
+          name: true,
+          email: true,
         },
       },
     },
   });
 
   return (
-    <ul>
+    <ul className="grid grid-cols-1 gap-4">
       {teamList.map((team) => (
         <div key={team.id}>
           <li>
-            <span>{team.name}</span>
-            {team.members.map((member) => (
-              <img
-                className="size-12 rounded-full"
-                key={member.id}
-                src={member.image || undefined}
-              />
-            ))}
+            <TeamListCard
+              members={team.members}
+              name={team.name}
+              teamId={team.id}
+              teamToken={team.token}
+              canDeleteTeam={team.adminId === user.id}
+            />
           </li>
-          <TeamDeleteButton teamId={team.id} />
         </div>
       ))}
     </ul>

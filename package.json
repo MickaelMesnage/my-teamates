@@ -13,6 +13,8 @@
     "@auth/prisma-adapter": "^1.4.0",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.10.2",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-switch": "^1.0.3",
     "argon2": "^0.40.1",
     "bcryptjs": "^2.4.3",
     "next": "14.1.0",

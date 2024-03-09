@@ -3,7 +3,7 @@
 import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/atoms/FormField";
 import { Input } from "@/components/atoms/Input";
-import { teamCreateAction } from "@/components/organisms/Team/TeamCreate/TeamCreateAction";
+import { teamJoinAction } from "@/components/organisms/Team/TeamJoin/TeamJoinAction";
 import { useToaster } from "@/hooks/useToaster";
 import { PAGES } from "@/pages";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,37 +12,48 @@ import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const teamCreateFormZodSchema = z.object({
-  name: z.string().min(1, "Champs requis"),
+export const teamJoinFormZodSchema = z.object({
+  token: z.string().min(1, "Champs requis"),
 });
 
-export type TeameCreateFormFieldValues = z.infer<
-  typeof teamCreateFormZodSchema
->;
+export type TeameJoinFormFieldValues = z.infer<typeof teamJoinFormZodSchema>;
 
-const DEFAULT_VALUES = { name: "" } satisfies TeameCreateFormFieldValues;
+type TeamJoinFormProps = {
+  token: string;
+};
 
-export const TeamCreateForm = () => {
+export const TeamJoinForm = ({ token }: TeamJoinFormProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const { toastError } = useToaster();
 
-  const methods = useForm<TeameCreateFormFieldValues>({
-    resolver: zodResolver(teamCreateFormZodSchema),
-    defaultValues: DEFAULT_VALUES,
+  const methods = useForm<TeameJoinFormFieldValues>({
+    resolver: zodResolver(teamJoinFormZodSchema),
+    defaultValues: { token },
   });
 
-  const onSubmit = async (data: TeameCreateFormFieldValues) => {
+  const onSubmit = async (data: TeameJoinFormFieldValues) => {
     startTransition(async () => {
       try {
         const formData = new FormData();
-        formData.append("name", data.name);
+        formData.append("token", data.token);
 
-        await teamCreateAction(formData);
+        await teamJoinAction(formData);
 
         router.push(PAGES.teams.list.url);
-      } catch (error) {
-        toastError("Erreur lors de la création de l'équipe");
+      } catch (error: unknown) {
+        console.log({ error });
+        if (error instanceof Error) {
+          if (error.message === "Wrong token error") {
+            toastError("Le token est invalide");
+            return;
+          }
+          if (error.message === "Team already joined error") {
+            toastError("Vous avez déjà rejoint cette équipe");
+            return;
+          }
+        }
+        toastError("Erreur lors de la tentative de rejoindre l'équipe");
       }
     });
   };
@@ -53,14 +64,14 @@ export const TeamCreateForm = () => {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <Controller
         control={control}
-        name="name"
+        name="token"
         render={({
           field: { onChange, value, name },
           fieldState: { error },
         }) => (
           <FormField>
             <FormField.Label htmlFor={name}>
-              Nom de la future équipe
+              Token de l&apos;équipe que je veux rejoindre
             </FormField.Label>
             <Input
               id={name}
@@ -73,7 +84,7 @@ export const TeamCreateForm = () => {
         )}
       />
       <Button type="submit" isLoading={isPending}>
-        Créer mon équipe
+        Rejoindre l&apos;équipe
       </Button>
     </form>
   );

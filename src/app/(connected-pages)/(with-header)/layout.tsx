@@ -1,7 +1,6 @@
-import { Shell } from "@/components/atoms/Shell";
 import { Header } from "@/components/organisms/Header";
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

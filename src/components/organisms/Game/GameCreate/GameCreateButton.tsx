@@ -1,10 +1,10 @@
 import { Button } from "@/components/atoms/Button";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import Link from "next/link";
 
 export const GameCreateButton = () => {
   return (
-    <Link href={URLS.gamesCreate} passHref>
+    <Link href={PAGES.games.create.url} passHref>
       <Button type="button">Créer un match</Button>
     </Link>
   );

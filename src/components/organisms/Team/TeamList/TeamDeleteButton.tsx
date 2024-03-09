@@ -1,20 +1,15 @@
 "use client";
 
-import { Button, ButtonProps } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms/Button";
 import { teamDeleteAction } from "@/components/organisms/Team/TeamDelete/TeamDeleteAction";
 import { DeleteIcon } from "@/svgs/DeleteIcon";
 import { useTransition } from "react";
-import { twMerge } from "tailwind-merge";
 
 export type TeamDeleteButtonProps = {
   teamId: string;
-} & Omit<ButtonProps, "onClick">;
+};
 
-export const TeamDeleteButton = ({
-  teamId,
-  className,
-  ...buttonProps
-}: TeamDeleteButtonProps) => {
+export const TeamDeleteButton = ({ teamId }: TeamDeleteButtonProps) => {
   const [isPending, startTransition] = useTransition();
 
   const onClick = () => {
@@ -26,10 +21,11 @@ export const TeamDeleteButton = ({
   return (
     <Button
       type="button"
+      variant="ghost"
+      fullSize
+      centered={false}
       onClick={onClick}
       isLoading={isPending}
-      className={twMerge("flex items-center gap-2", className)}
-      {...buttonProps}
     >
       <DeleteIcon className="size-5 fill-text-secondary group-hover/button:fill-text-primary " />
       <span className="text-base text-text-secondary group-hover/button:text-text-primary">

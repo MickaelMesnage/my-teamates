@@ -2,7 +2,8 @@
 
 import { authGuard } from "@/guards/authGuard";
 import { prisma } from "@/lib/prisma";
-import { URLS } from "@/urls";
+import { generateToken } from "@/lib/utils/token";
+import { PAGES } from "@/pages";
 import { revalidatePath } from "next/cache";
 
 export async function teamCreateAction(formData: FormData) {
@@ -10,9 +11,25 @@ export async function teamCreateAction(formData: FormData) {
 
   const name = formData.get("name") as string;
 
+  let unique = false;
+  let token = "";
+  while (!unique) {
+    // Générer un token de 6 bytes, qui sera plus long une fois converti en hexadécimal
+    // puis sélectionner les 8 premiers caractères pour obtenir un token de la longueur désirée
+    token = generateToken();
+    // Vérifier l'unicité du token dans la base de données
+    const count = await prisma.team.count({
+      where: {
+        token: token,
+      },
+    });
+    if (count === 0) unique = true;
+  }
+
   await prisma.team.create({
     data: {
       name,
+      token,
       members: {
         connect: [{ id: user.id }],
       },
@@ -20,5 +37,5 @@ export async function teamCreateAction(formData: FormData) {
     },
   });
 
-  revalidatePath(URLS.teamsList);
+  revalidatePath(PAGES.teams.list.url);
 }

@@ -3,7 +3,7 @@ import { Separator } from "@/components/atoms/Separator";
 import { Shell } from "@/components/atoms/Shell";
 import { SigninForm } from "@/components/organisms/Signin/SigninForm";
 import { SigninSocialNetworkButtons } from "@/components/organisms/Signin/SigninSocialNetworkButtons";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -23,7 +23,7 @@ export default async function Page() {
               Pas encore de compte ?
               <Link
                 className="ml-2 text-base text-brand-darker"
-                href={URLS.signup}
+                href={PAGES.auth.signup.url}
               >
                 M&apos;inscrire
               </Link>

@@ -1,7 +1,7 @@
 import { Card } from "@/components/atoms/Card";
 import { Shell } from "@/components/atoms/Shell";
 import { SignupForm } from "@/components/organisms/Signup/SignupForm";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -19,7 +19,7 @@ export default async function Page() {
               Déjà inscrit ?
               <Link
                 className="ml-2 text-base text-brand-darker"
-                href={URLS.signin}
+                href={PAGES.auth.signin.url}
               >
                 Me connecter
               </Link>

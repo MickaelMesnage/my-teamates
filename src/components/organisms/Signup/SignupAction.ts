@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/utils/password";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import { redirect } from "next/navigation";
 
 export async function signupAction(formData: FormData) {
@@ -23,5 +23,5 @@ export async function signupAction(formData: FormData) {
     },
   });
 
-  redirect(URLS.signin);
+  redirect(PAGES.auth.signin.url);
 }

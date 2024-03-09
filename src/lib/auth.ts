@@ -72,15 +72,3 @@ export const { auth, handlers } = NextAuth({
     strategy: "jwt",
   },
 });
-
-export const getAuthSession = async () => await auth();
-
-export const getRequiredAuthSession = async () => {
-  const session = await getAuthSession();
-
-  if (!session) {
-    throw new Error("getRequiredAuthSession: Session not found");
-  }
-
-  return session;
-};

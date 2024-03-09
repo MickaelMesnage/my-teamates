@@ -71,6 +71,7 @@ model Team {
   adminId   String
   members   User[]   @relation("UsersTeams")
   games     Game[]
+  token     String   @unique
 }
 
 model Game {

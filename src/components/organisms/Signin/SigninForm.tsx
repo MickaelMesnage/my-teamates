@@ -4,7 +4,7 @@ import { Button } from "@/components/atoms/Button";
 import { FormField } from "@/components/atoms/FormField";
 import { Input } from "@/components/atoms/Input";
 import { useToaster } from "@/hooks/useToaster";
-import { URLS } from "@/urls";
+import { PAGES } from "@/pages";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -46,7 +46,7 @@ export const SigninForm = () => {
         if (response?.error) {
           throw new Error("SigninForm onSubmit: Callback error");
         }
-        router.push(URLS.home);
+        router.push(PAGES.home.url);
       } catch (error) {
         toastError("Erreur lors de la connexion");
       }
