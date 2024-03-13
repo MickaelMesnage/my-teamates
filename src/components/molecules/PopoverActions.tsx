@@ -1,8 +1,8 @@
 "use client";
 
-import { Dropdown } from "@/components/atoms/Dropdown";
-import { IconButton } from "@/components/atoms/IconButton";
-import { BurgerIcon } from "@/svgs/BurgerIcon";
+import { Dropdown } from "@/src/components/atoms/Dropdown";
+import { IconButton } from "@/src/components/atoms/IconButton";
+import { BurgerIcon } from "@/src/svgs/BurgerIcon";
 import * as Popover from "@radix-ui/react-popover";
 import { ComponentProps, ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";

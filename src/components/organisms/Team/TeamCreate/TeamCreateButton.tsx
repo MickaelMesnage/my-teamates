@@ -1,4 +1,4 @@
-import { PAGES } from "@/pages";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 
 export const TeamCreateButton = () => {

@@ -1,9 +1,9 @@
 "use server";
 
-import { authGuard } from "@/guards/authGuard";
-import { prisma } from "@/lib/prisma";
-import { generateToken } from "@/lib/utils/token";
-import { PAGES } from "@/pages";
+import { authGuard } from "@/src/guards/authGuard";
+import { prisma } from "@/src/lib/prisma";
+import { generateToken } from "@/src/lib/utils/token";
+import { PAGES } from "@/src/pages";
 import { revalidatePath } from "next/cache";
 
 export async function teamCreateAction(formData: FormData) {

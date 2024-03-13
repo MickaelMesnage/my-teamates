@@ -1,8 +1,8 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
-import { hashPassword } from "@/lib/utils/password";
-import { PAGES } from "@/pages";
+import { prisma } from "@/src/lib/prisma";
+import { hashPassword } from "@/src/lib/utils/password";
+import { PAGES } from "@/src/pages";
 import { redirect } from "next/navigation";
 
 export async function signupAction(formData: FormData) {

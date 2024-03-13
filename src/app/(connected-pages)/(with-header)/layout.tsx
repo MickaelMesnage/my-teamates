@@ -1,4 +1,4 @@
-import { Header } from "@/components/organisms/Header";
+import { Header } from "@/src/components/organisms/Header";
 
 export default function Layout({
   children,

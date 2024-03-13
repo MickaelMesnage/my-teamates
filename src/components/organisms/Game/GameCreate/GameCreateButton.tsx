@@ -1,5 +1,5 @@
-import { Button } from "@/components/atoms/Button";
-import { PAGES } from "@/pages";
+import { Button } from "@/src/components/atoms/Button";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 
 export const GameCreateButton = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { SpinnerIcon } from "@/svgs/SpinnerIcon";
+import { SpinnerIcon } from "@/src/svgs/SpinnerIcon";
 import { ComponentProps, ComponentPropsWithoutRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 

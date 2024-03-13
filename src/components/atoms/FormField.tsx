@@ -1,4 +1,4 @@
-import { InfoIcon } from "@/svgs/InfoIcon";
+import { InfoIcon } from "@/src/svgs/InfoIcon";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 

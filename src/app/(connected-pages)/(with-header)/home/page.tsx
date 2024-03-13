@@ -1,5 +1,5 @@
-import { Shell } from "@/components/atoms/Shell";
-import { PAGES } from "@/pages";
+import { Shell } from "@/src/components/atoms/Shell";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 
 export default function Page() {

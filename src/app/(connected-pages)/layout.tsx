@@ -1,5 +1,5 @@
-import { auth } from "@/lib/auth";
-import { PAGES } from "@/pages";
+import { auth } from "@/src/lib/auth";
+import { PAGES } from "@/src/pages";
 import { redirect } from "next/navigation";
 
 export default async function Layout({

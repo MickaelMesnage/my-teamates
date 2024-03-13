@@ -1,6 +1,6 @@
-import { SignoutButton } from "@/components/organisms/Signout/SignoutButton";
-import { auth } from "@/lib/auth";
-import { PAGES } from "@/pages";
+import { SignoutButton } from "@/src/components/organisms/Signout/SignoutButton";
+import { auth } from "@/src/lib/auth";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";

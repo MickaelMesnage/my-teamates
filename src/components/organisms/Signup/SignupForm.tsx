@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button";
-import { FormField } from "@/components/atoms/FormField";
-import { Input } from "@/components/atoms/Input";
-import { signupAction } from "@/components/organisms/Signup/SignupAction";
+import { Button } from "@/src/components/atoms/Button";
+import { FormField } from "@/src/components/atoms/FormField";
+import { Input } from "@/src/components/atoms/Input";
+import { signupAction } from "@/src/components/organisms/Signup/SignupAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";

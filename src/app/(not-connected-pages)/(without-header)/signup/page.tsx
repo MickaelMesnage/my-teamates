@@ -1,7 +1,7 @@
-import { Card } from "@/components/atoms/Card";
-import { Shell } from "@/components/atoms/Shell";
-import { SignupForm } from "@/components/organisms/Signup/SignupForm";
-import { PAGES } from "@/pages";
+import { Card } from "@/src/components/atoms/Card";
+import { Shell } from "@/src/components/atoms/Shell";
+import { SignupForm } from "@/src/components/organisms/Signup/SignupForm";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 

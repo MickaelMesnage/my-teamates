@@ -1,6 +1,6 @@
-import { Section } from "@/components/atoms/Section";
-import { Shell } from "@/components/atoms/Shell";
-import { TeamJoinForm } from "@/components/organisms/Team/TeamJoin/TeamJoinForm";
+import { Section } from "@/src/components/atoms/Section";
+import { Shell } from "@/src/components/atoms/Shell";
+import { TeamJoinForm } from "@/src/components/organisms/Team/TeamJoin/TeamJoinForm";
 import { Suspense } from "react";
 
 export default function Page({

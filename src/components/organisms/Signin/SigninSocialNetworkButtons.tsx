@@ -1,7 +1,7 @@
 "use client";
 
-import { IconButton } from "@/components/atoms/IconButton";
-import { GithubIcon } from "@/svgs/GithubIcon";
+import { IconButton } from "@/src/components/atoms/IconButton";
+import { GithubIcon } from "@/src/svgs/GithubIcon";
 import { signIn } from "next-auth/react";
 
 export const SigninSocialNetworkButtons = () => {

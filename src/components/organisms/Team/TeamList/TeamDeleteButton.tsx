@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button";
-import { teamDeleteAction } from "@/components/organisms/Team/TeamDelete/TeamDeleteAction";
-import { DeleteIcon } from "@/svgs/DeleteIcon";
+import { Button } from "@/src/components/atoms/Button";
+import { teamDeleteAction } from "@/src/components/organisms/Team/TeamDelete/TeamDeleteAction";
+import { DeleteIcon } from "@/src/svgs/DeleteIcon";
 import { useTransition } from "react";
 
 export type TeamDeleteButtonProps = {

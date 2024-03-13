@@ -1,7 +1,7 @@
-import { Section } from "@/components/atoms/Section";
-import { Shell } from "@/components/atoms/Shell";
-import { TeamCreateButton } from "@/components/organisms/Team/TeamCreate/TeamCreateButton";
-import { TeamList } from "@/components/organisms/Team/TeamList/TeamList";
+import { Section } from "@/src/components/atoms/Section";
+import { Shell } from "@/src/components/atoms/Shell";
+import { TeamCreateButton } from "@/src/components/organisms/Team/TeamCreate/TeamCreateButton";
+import { TeamList } from "@/src/components/organisms/Team/TeamList/TeamList";
 import { Suspense } from "react";
 
 export default async function Page() {

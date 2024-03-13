@@ -1,13 +1,13 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
-import { PAGES } from "@/pages";
+import { prisma } from "@/src/lib/prisma";
+import { PAGES } from "@/src/pages";
 import { revalidatePath } from "next/cache";
 
-export async function teamDeleteAction(userId: string) {
+export async function teamDeleteAction(teamId: string) {
   await prisma.team.delete({
     where: {
-      id: userId,
+      id: teamId,
     },
   });
 

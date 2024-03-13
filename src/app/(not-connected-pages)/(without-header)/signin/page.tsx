@@ -1,9 +1,9 @@
-import { Card } from "@/components/atoms/Card";
-import { Separator } from "@/components/atoms/Separator";
-import { Shell } from "@/components/atoms/Shell";
-import { SigninForm } from "@/components/organisms/Signin/SigninForm";
-import { SigninSocialNetworkButtons } from "@/components/organisms/Signin/SigninSocialNetworkButtons";
-import { PAGES } from "@/pages";
+import { Card } from "@/src/components/atoms/Card";
+import { Separator } from "@/src/components/atoms/Separator";
+import { Shell } from "@/src/components/atoms/Shell";
+import { SigninForm } from "@/src/components/organisms/Signin/SigninForm";
+import { SigninSocialNetworkButtons } from "@/src/components/organisms/Signin/SigninSocialNetworkButtons";
+import { PAGES } from "@/src/pages";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 

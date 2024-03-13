@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button";
-import { useToaster } from "@/hooks/useToaster";
-import { PAGES } from "@/pages";
-import { ShareIcon } from "@/svgs/ShareIcon";
+import { Button } from "@/src/components/atoms/Button";
+import { useToaster } from "@/src/hooks/useToaster";
+import { PAGES } from "@/src/pages";
+import { ShareIcon } from "@/src/svgs/ShareIcon";
 
 export type TeamDeleteButtonProps = {
   teamToken: string;
@@ -11,6 +11,7 @@ export type TeamDeleteButtonProps = {
 
 export const TeamShareButton = ({ teamToken }: TeamDeleteButtonProps) => {
   const { toastError } = useToaster();
+
   const onClick = async () => {
     try {
       await navigator.clipboard.writeText(
@@ -18,7 +19,6 @@ export const TeamShareButton = ({ teamToken }: TeamDeleteButtonProps) => {
           teamToken
         )}`
       );
-      console.log("Lien de partage copié");
     } catch (err) {
       toastError("Erreur lors de la copie du lien de partage");
     }

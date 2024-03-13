@@ -1,4 +1,4 @@
-import { Actions } from "@/components/atoms/Actions";
+import { Actions } from "@/src/components/atoms/Actions";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -8,8 +8,7 @@ export const Card = ({ className, ...rest }: CardProps) => {
   return (
     <div
       className={twMerge(
-        "w-full rounded-sm bg-white border shadow-md p-6",
-        "flex flex-col gap-6",
+        "w-full rounded-md bg-white border shadow-md",
         className
       )}
       {...rest}

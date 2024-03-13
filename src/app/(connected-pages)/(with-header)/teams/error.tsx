@@ -1,6 +1,6 @@
 "use client";
 
-import { Shell } from "@/components/atoms/Shell";
+import { Shell } from "@/src/components/atoms/Shell";
 
 export default function Error({
   error,

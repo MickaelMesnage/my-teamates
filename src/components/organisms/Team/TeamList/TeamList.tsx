@@ -1,11 +1,18 @@
-import { TeamListCard } from "@/components/organisms/Team/TeamList/TeamListCard";
-import { getRequiredUser } from "@/lib/getRequiredUser";
-import { prisma } from "@/lib/prisma";
+import { TeamListCard } from "@/src/components/organisms/Team/TeamList/TeamListCard";
+import { getRequiredUser } from "@/src/lib/getRequiredUser";
+import { prisma } from "@/src/lib/prisma";
 
 export const TeamList = async () => {
   const user = await getRequiredUser();
 
   const teamList = await prisma.team.findMany({
+    where: {
+      members: {
+        some: {
+          id: user.id,
+        },
+      },
+    },
     include: {
       members: {
         select: {
@@ -19,7 +26,7 @@ export const TeamList = async () => {
   });
 
   return (
-    <ul className="grid grid-cols-1 gap-4">
+    <ul className="flex flex-col gap-4">
       {teamList.map((team) => (
         <div key={team.id}>
           <li>
@@ -29,6 +36,8 @@ export const TeamList = async () => {
               teamId={team.id}
               teamToken={team.token}
               canDeleteTeam={team.adminId === user.id}
+              canLeaveTeam={team.adminId !== user.id}
+              canShareTeam={true}
             />
           </li>
         </div>

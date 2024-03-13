@@ -1,4 +1,4 @@
-import { Actions } from "@/components/atoms/Actions";
+import { Actions } from "@/src/components/atoms/Actions";
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 

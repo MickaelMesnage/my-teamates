@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/src/lib/auth";
 
 export const getRequiredUser = async () => {
   const session = await auth();

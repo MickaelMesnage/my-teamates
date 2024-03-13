@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button";
-import { FormField } from "@/components/atoms/FormField";
-import { Input } from "@/components/atoms/Input";
-import { teamJoinAction } from "@/components/organisms/Team/TeamJoin/TeamJoinAction";
-import { useToaster } from "@/hooks/useToaster";
-import { PAGES } from "@/pages";
+import { Button } from "@/src/components/atoms/Button";
+import { FormField } from "@/src/components/atoms/FormField";
+import { Input } from "@/src/components/atoms/Input";
+import { teamJoinAction } from "@/src/components/organisms/Team/TeamJoin/TeamJoinAction";
+import { useToaster } from "@/src/hooks/useToaster";
+import { PAGES } from "@/src/pages";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";

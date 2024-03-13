@@ -1,10 +1,11 @@
 "use client";
 
-import { Dropdown } from "@/components/atoms/Dropdown";
-import { IconButton } from "@/components/atoms/IconButton";
-import { TeamDeleteButton } from "@/components/organisms/Team/TeamList/TeamDeleteButton";
-import { TeamShareButton } from "@/components/organisms/Team/TeamList/TeamShareButton";
-import { BurgerIcon } from "@/svgs/BurgerIcon";
+import { Dropdown } from "@/src/components/atoms/Dropdown";
+import { IconButton } from "@/src/components/atoms/IconButton";
+import { TeamDeleteButton } from "@/src/components/organisms/Team/TeamList/TeamDeleteButton";
+import { TeamLeaveButton } from "@/src/components/organisms/Team/TeamList/TeamLeaveButton";
+import { TeamShareButton } from "@/src/components/organisms/Team/TeamList/TeamShareButton";
+import { BurgerIcon } from "@/src/svgs/BurgerIcon";
 import * as Popover from "@radix-ui/react-popover";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -13,12 +14,16 @@ type TeamListCardActions = {
   teamId: string;
   teamToken: string;
   canDeleteTeam: boolean;
+  canLeaveTeam: boolean;
+  canShareTeam: boolean;
 };
 
 export const TeamListCardActions = ({
   teamId,
   teamToken,
   canDeleteTeam,
+  canLeaveTeam,
+  canShareTeam,
 }: TeamListCardActions) => {
   const [open, setOpen] = useState(false);
 
@@ -48,7 +53,8 @@ export const TeamListCardActions = ({
           <Dropdown>
             <Dropdown.Content>
               {canDeleteTeam && <TeamDeleteButton teamId={teamId} />}
-              <TeamShareButton teamToken={teamToken} />
+              {canShareTeam && <TeamShareButton teamToken={teamToken} />}
+              {canLeaveTeam && <TeamLeaveButton teamId={teamId} />}
             </Dropdown.Content>
           </Dropdown>
         </Popover.Content>

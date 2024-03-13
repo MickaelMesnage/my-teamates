@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { PAGES } from "@/pages";
+import { prisma } from "@/src/lib/prisma";
+import { PAGES } from "@/src/pages";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 

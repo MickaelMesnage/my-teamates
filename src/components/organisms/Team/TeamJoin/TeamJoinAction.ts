@@ -1,8 +1,8 @@
 "use server";
 
-import { authGuard } from "@/guards/authGuard";
-import { prisma } from "@/lib/prisma";
-import { PAGES } from "@/pages";
+import { authGuard } from "@/src/guards/authGuard";
+import { prisma } from "@/src/lib/prisma";
+import { PAGES } from "@/src/pages";
 import { revalidatePath } from "next/cache";
 
 const WRONG_TOKEN_ERROR = "Wrong token error";
