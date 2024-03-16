@@ -71,7 +71,7 @@ export const TeamJoinForm = ({ token }: TeamJoinFormProps) => {
         }) => (
           <FormField>
             <FormField.Label htmlFor={name}>
-              Token de l&apos;équipe que je veux rejoindre
+              Token de l&apos;équipe que tu veux rejoindre
             </FormField.Label>
             <Input
               id={name}

@@ -4,13 +4,11 @@ import { TeamJoinForm } from "@/src/components/organisms/Team/TeamJoin/TeamJoinF
 import { Suspense } from "react";
 
 export default function Page({
-  params,
+  searchParams,
 }: {
-  params: {
-    token: string;
-  };
+  searchParams: { token: string };
 }) {
-  const { token } = params;
+  const { token } = searchParams;
 
   return (
     <main>
@@ -21,7 +19,7 @@ export default function Page({
           </Section.Header>
           <Section.Body>
             <Suspense fallback={<div>Chargement...</div>}>
-              <TeamJoinForm token={token} />
+              <TeamJoinForm token={token || ""} />
             </Suspense>
           </Section.Body>
         </Section>

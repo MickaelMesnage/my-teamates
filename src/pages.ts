@@ -24,7 +24,7 @@ export const PAGES = {
       url: (id: string) => `/teams/${id}/edit`,
     },
     join: {
-      url: (token: string) => `/teams/join/${token}`,
+      url: (token?: string) => `/teams/join/${token ? `?token=${token}` : ""}`,
     },
     joinSuccess: {
       url: `/teams/join-success`,
