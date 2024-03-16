@@ -1,11 +1,11 @@
 "use client";
 
-import { ButtonHTMLAttributes, forwardRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 export type IconButtonProps = {
   isLoading?: boolean;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+} & ComponentPropsWithoutRef<"button">;
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ isLoading, disabled, children, className, ...rest }, ref) => {

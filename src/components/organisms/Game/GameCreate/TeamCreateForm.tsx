@@ -3,7 +3,7 @@
 import { Button } from "@/src/components/atoms/Button";
 import { FormField } from "@/src/components/atoms/FormField";
 import { Input } from "@/src/components/atoms/Input";
-import { teamCreateAction } from "@/src/components/organisms/Team/TeamCreate/TeamCreateAction";
+import { teamCreateAction } from "@/src/components/organisms/Team/actions/TeamCreateAction";
 import { useToaster } from "@/src/hooks/useToaster";
 import { PAGES } from "@/src/pages";
 import { zodResolver } from "@hookform/resolvers/zod";

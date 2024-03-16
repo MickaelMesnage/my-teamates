@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/src/components/atoms/Button";
+import { PopoverActionsButton } from "@/src/components/molecules/PopoverActionsButton";
 import { useToaster } from "@/src/hooks/useToaster";
 import { PAGES } from "@/src/pages";
 import { ShareIcon } from "@/src/svgs/ShareIcon";
@@ -10,7 +10,7 @@ export type TeamDeleteButtonProps = {
 };
 
 export const TeamShareButton = ({ teamToken }: TeamDeleteButtonProps) => {
-  const { toastError } = useToaster();
+  const { toastError, toastSuccess } = useToaster();
 
   const onClick = async () => {
     try {
@@ -19,23 +19,19 @@ export const TeamShareButton = ({ teamToken }: TeamDeleteButtonProps) => {
           teamToken
         )}`
       );
+      toastSuccess("Lien de partage copié");
     } catch (err) {
       toastError("Erreur lors de la copie du lien de partage");
     }
   };
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      fullSize
-      centered={false}
+    <PopoverActionsButton
       onClick={onClick}
-    >
-      <ShareIcon className="size-5 fill-text-secondary group-hover/button:fill-text-primary " />
-      <span className="text-base text-text-secondary group-hover/button:text-text-primary">
-        Copier le lien de partage
-      </span>
-    </Button>
+      label="Copier le lien de partage"
+      icon={
+        <ShareIcon className="size-5 fill-text-secondary group-hover/button:fill-text-primary " />
+      }
+    />
   );
 };

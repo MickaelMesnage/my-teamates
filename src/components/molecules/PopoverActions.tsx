@@ -1,8 +1,7 @@
 "use client";
 
 import { Dropdown } from "@/src/components/atoms/Dropdown";
-import { IconButton } from "@/src/components/atoms/IconButton";
-import { BurgerIcon } from "@/src/svgs/BurgerIcon";
+import { BurgerIconButton } from "@/src/components/molecules/BurgerIconButton";
 import * as Popover from "@radix-ui/react-popover";
 import { ComponentProps, ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -10,13 +9,15 @@ import { twMerge } from "tailwind-merge";
 export type PopoverActionsProps = {
   children: ReactNode;
   disabled?: ComponentProps<"button">["disabled"];
+  className?: ComponentProps<"div">["className"];
 };
 
 export const PopoverActions = ({
   children,
-  disabled = false,
+  disabled,
+  className,
 }: PopoverActionsProps) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -27,23 +28,18 @@ export const PopoverActions = ({
         }}
         asChild
       >
-        <IconButton disabled={disabled}>
-          <BurgerIcon
-            className={twMerge(
-              "w-5 h-5 fill-text-secondary group-hover/icon-button:fill-text-primary",
-              disabled && "cursor-not-allowed"
-            )}
-          />
-        </IconButton>
+        <BurgerIconButton disabled={disabled} />
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className="absolute top-0 -right-4 z-30"
+          className={twMerge("absolute top-0 -right-4 z-30", className)}
           sideOffset={5}
           onClick={(e) => e.preventDefault()}
         >
           <Dropdown>
-            <Dropdown.Content>{children}</Dropdown.Content>
+            <Dropdown.Content onClick={() => setOpen(false)}>
+              {children}
+            </Dropdown.Content>
           </Dropdown>
         </Popover.Content>
       </Popover.Portal>

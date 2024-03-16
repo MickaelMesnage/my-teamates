@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, ButtonProps } from "@/src/components/atoms/Button";
-import { teamDeleteAction } from "@/src/components/organisms/Team/TeamDelete/TeamDeleteAction";
+import { teamDeleteAction } from "@/src/components/organisms/Team/actions/TeamDeleteAction";
 import { DeleteIcon } from "@/src/svgs/DeleteIcon";
 import { useTransition } from "react";
 import { twMerge } from "tailwind-merge";

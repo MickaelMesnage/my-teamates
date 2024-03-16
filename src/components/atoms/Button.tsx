@@ -33,7 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "relative",
           "p-2 text-base font-medium rounded-md",
           "disabled:opacity-30 disabled:cursor-not-allowed outline-offset-2 outline-2",
-          "group-button",
+          "group/button",
           isLoading && "bg-gray-500",
           fullSize && "w-full",
           variant === "primary" &&

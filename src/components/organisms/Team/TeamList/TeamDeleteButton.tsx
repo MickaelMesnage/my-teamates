@@ -1,36 +1,39 @@
 "use client";
 
-import { Button } from "@/src/components/atoms/Button";
-import { teamDeleteAction } from "@/src/components/organisms/Team/TeamDelete/TeamDeleteAction";
+import { PopoverActionsButton } from "@/src/components/molecules/PopoverActionsButton";
+import { teamDeleteAction } from "@/src/components/organisms/Team/actions/TeamDeleteAction";
+import { useToaster } from "@/src/hooks/useToaster";
 import { DeleteIcon } from "@/src/svgs/DeleteIcon";
-import { useTransition } from "react";
+import { MouseEventHandler, ReactEventHandler, useTransition } from "react";
 
 export type TeamDeleteButtonProps = {
   teamId: string;
 };
 
 export const TeamDeleteButton = ({ teamId }: TeamDeleteButtonProps) => {
+  const { toastError, toastSuccess } = useToaster();
   const [isPending, startTransition] = useTransition();
 
   const onClick = () => {
-    startTransition(() => {
-      teamDeleteAction(teamId);
+    startTransition(async () => {
+      try {
+        await teamDeleteAction(teamId);
+        toastSuccess("L'équipe a été supprimée");
+      } catch {
+        toastError("Erreur lors de la tentative de suppression de l'équipe");
+      }
     });
   };
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      fullSize
-      centered={false}
+    <PopoverActionsButton
       onClick={onClick}
+      label="Supprimer"
+      disabled={isPending}
       isLoading={isPending}
-    >
-      <DeleteIcon className="size-5 fill-text-secondary group-hover/button:fill-text-primary " />
-      <span className="text-base text-text-secondary group-hover/button:text-text-primary">
-        Supprimer
-      </span>
-    </Button>
+      icon={
+        <DeleteIcon className="size-5 fill-text-secondary group-hover/button:fill-text-primary " />
+      }
+    />
   );
 };

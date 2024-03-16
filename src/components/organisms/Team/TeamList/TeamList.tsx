@@ -1,44 +1,53 @@
-import { TeamListCard } from "@/src/components/organisms/Team/TeamList/TeamListCard";
-import { getRequiredUser } from "@/src/lib/getRequiredUser";
-import { prisma } from "@/src/lib/prisma";
+import { Avatar } from "@/src/components/atoms/Avatar";
+import { Card } from "@/src/components/atoms/Card";
+import { PopoverActions } from "@/src/components/molecules/PopoverActions";
+import { TeamDeleteButton } from "@/src/components/organisms/Team/TeamList/TeamDeleteButton";
+import { TeamLeaveButton } from "@/src/components/organisms/Team/TeamList/TeamLeaveButton";
+import { TeamShareButton } from "@/src/components/organisms/Team/TeamList/TeamShareButton";
+import { getTeamList } from "@/src/components/organisms/Team/TeamList/getTeamList";
+import { userConnectedGuard } from "@/src/guards/userConnectedGuard";
+import { twMerge } from "tailwind-merge";
 
 export const TeamList = async () => {
-  const user = await getRequiredUser();
-
-  const teamList = await prisma.team.findMany({
-    where: {
-      members: {
-        some: {
-          id: user.id,
-        },
-      },
-    },
-    include: {
-      members: {
-        select: {
-          image: true,
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-    },
-  });
+  await userConnectedGuard();
+  const teamList = await getTeamList();
 
   return (
     <ul className="flex flex-col gap-4">
       {teamList.map((team) => (
         <div key={team.id}>
           <li>
-            <TeamListCard
-              members={team.members}
-              name={team.name}
-              teamId={team.id}
-              teamToken={team.token}
-              canDeleteTeam={team.adminId === user.id}
-              canLeaveTeam={team.adminId !== user.id}
-              canShareTeam={true}
-            />
+            <Card className="w-full h-80 flex gap-0">
+              <div
+                className={twMerge(
+                  "w-1/3 h-full rounded-l-md",
+                  "bg-[url('/photos/team-foot.webp')]",
+                  "bg-cover bg-center"
+                )}
+              />
+              <div className="relative grow p-6">
+                <h2 className="text-xl text-text-primary">{team.name}</h2>
+                <p className="text-base text-text-secondary">
+                  Aucune description pour cette équipe
+                </p>
+                <div className="flex items-center gap-4">
+                  {team.members.map((member) => (
+                    <Avatar key={member.id} {...member} />
+                  ))}
+                </div>
+                <div className="absolute right-6 top-6">
+                  <PopoverActions className="w-72">
+                    {team.canDeleteTeam && (
+                      <TeamDeleteButton teamId={team.id} />
+                    )}
+                    {team.canLeaveTeam && <TeamLeaveButton teamId={team.id} />}
+                    {team.canShareTeam && (
+                      <TeamShareButton teamToken={team.token} />
+                    )}
+                  </PopoverActions>
+                </div>
+              </div>
+            </Card>
           </li>
         </div>
       ))}
