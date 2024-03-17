@@ -1,8 +1,5 @@
-import { Button } from "@/src/components/atoms/Button";
 import { TeamCreateButton } from "@/src/components/organisms/Team/TeamCreate/TeamCreateButton";
 import { TeamJoinButton } from "@/src/components/organisms/Team/TeamJoin/TeamJoinButton";
-import { PAGES } from "@/src/pages";
-import Link from "next/link";
 
 export const NoTeams = () => {
   return (

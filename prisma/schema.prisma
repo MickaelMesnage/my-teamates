@@ -81,4 +81,7 @@ model Game {
   UsersGames User[]
   team       Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
   teamId     String
+  data       DateTime
+  place      String?
+  nbPLayers  Int
 }
