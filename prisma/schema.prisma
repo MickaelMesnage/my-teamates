@@ -51,7 +51,8 @@ model User {
   sessions           Session[]
   teams              Team[]    @relation("UsersTeams")
   administrableTeams Team[]
-  games              Game[]
+  games              Game[]    @relation("UsersGames")
+  createdGames       Game[]
 }
 
 model VerificationToken {
@@ -75,13 +76,15 @@ model Team {
 }
 
 model Game {
-  id         String   @id @default(cuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  UsersGames User[]
-  team       Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId     String
-  data       DateTime
-  place      String?
-  nbPLayers  Int
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  participants User[]   @relation("UsersGames")
+  team         Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId       String
+  admin        User     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  adminId      String
+  date         DateTime
+  place        String?
+  nbPLayers    Int
 }

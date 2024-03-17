@@ -18,6 +18,7 @@ export const gameCreateFormZodSchema = z.object({
   date: z.string().min(1, "Champs requis"),
   time: z.string().min(1, "Champs requis"),
   place: z.string(),
+  nbPlayers: z.number(),
 });
 
 export type GameCreateFormFieldValues = z.infer<typeof gameCreateFormZodSchema>;
@@ -27,6 +28,7 @@ const DEFAULT_VALUES = {
   date: "",
   time: "",
   place: "",
+  nbPlayers: 10,
 } satisfies GameCreateFormFieldValues;
 
 type GameCreateFormProps = {
@@ -50,6 +52,8 @@ export const GameCreateForm = ({ teams }: GameCreateFormProps) => {
         formData.append("date", data.date);
         formData.append("time", data.time);
         formData.append("place", data.place);
+        formData.append("teamId", data.teamId);
+        formData.append("nbPlayers", data.nbPlayers.toString());
 
         await gameCreateAction(formData);
 
@@ -127,6 +131,26 @@ export const GameCreateForm = ({ teams }: GameCreateFormProps) => {
               onChange={onChange}
               isOnError={!!error}
               type="time"
+            />
+            {error?.message && <FormField.Error label={error?.message} />}
+          </FormField>
+        )}
+      />
+      <Controller
+        control={control}
+        name="nbPlayers"
+        render={({
+          field: { onChange, value, name },
+          fieldState: { error },
+        }) => (
+          <FormField>
+            <FormField.Label htmlFor={name}>Nombre de joueurs</FormField.Label>
+            <Input
+              id={name}
+              value={value}
+              onChange={onChange}
+              isOnError={!!error}
+              type="number"
             />
             {error?.message && <FormField.Error label={error?.message} />}
           </FormField>
