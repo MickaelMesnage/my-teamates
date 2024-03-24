@@ -9,14 +9,9 @@ import { twMerge } from "tailwind-merge";
 export type PopoverActionsProps = {
   children: ReactNode;
   disabled?: ComponentProps<"button">["disabled"];
-  className?: ComponentProps<"div">["className"];
 };
 
-export const PopoverActions = ({
-  children,
-  disabled,
-  className,
-}: PopoverActionsProps) => {
+export const PopoverActions = ({ children, disabled }: PopoverActionsProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -32,8 +27,10 @@ export const PopoverActions = ({
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className={twMerge("absolute top-0 -right-4 z-30", className)}
+          // className={twMerge("absolute top-0 -right-4 z-30", className)}
           sideOffset={5}
+          side="bottom"
+          align="end"
           onClick={(e) => e.preventDefault()}
         >
           <Dropdown>
