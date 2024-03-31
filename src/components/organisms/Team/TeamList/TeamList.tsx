@@ -51,7 +51,7 @@ export const TeamList = async () => {
                       ))}
                     </div>
                     <div className="absolute right-6 top-6">
-                      <PopoverActions className="w-72">
+                      <PopoverActions>
                         {team.canDeleteTeam && (
                           <TeamDeleteButton teamId={team.id} />
                         )}

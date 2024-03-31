@@ -15,22 +15,22 @@ export const getGameList = async () => {
       },
     },
     include: {
-      team: {
+      participants: {
         select: {
           id: true,
           name: true,
-          members: {
-            select: {
-              id: true,
-              name: true,
-              image: true,
-              email: true,
-            },
-          },
+          image: true,
         },
       },
     },
   });
 
-  return gameList;
+  return gameList.map(({ participants, ...rest }) => ({
+    ...rest,
+    participants: participants.map(({ id, name, image }) => ({
+      id,
+      name: name || "John doe",
+      image,
+    })),
+  }));
 };

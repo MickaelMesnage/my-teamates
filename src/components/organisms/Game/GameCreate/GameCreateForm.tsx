@@ -76,7 +76,7 @@ export const GameCreateForm = ({ teams }: GameCreateFormProps) => {
           fieldState: { error },
         }) => (
           <FormField>
-            <FormField.Label htmlFor={name}>Date</FormField.Label>
+            <FormField.Label htmlFor={name}>Team</FormField.Label>
             <Select
               id={name}
               value={value}
