@@ -4,32 +4,21 @@ import { Button } from "@/src/components/atoms/Button";
 import { FormField } from "@/src/components/atoms/FormField";
 import { Input } from "@/src/components/atoms/Input";
 import { Select } from "@/src/components/atoms/Select";
+import { SubmitButton } from "@/src/components/molecules/SubmitButton";
 import { gameCreateAction } from "@/src/components/organisms/Game/actions/gameCreateAction";
-import { useToaster } from "@/src/hooks/useToaster";
-import { PAGES } from "@/src/pages";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { gameCreateSchema } from "@/src/components/organisms/Game/actions/gameCreateSchema";
+import { getFormProps, useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import { useFormState, useFormStatus } from "react-dom";
 
-export const gameCreateFormZodSchema = z.object({
-  teamId: z.string().min(1, "Champs requis"),
-  date: z.string().min(1, "Champs requis"),
-  time: z.string().min(1, "Champs requis"),
-  place: z.string(),
-  nbPlayers: z.number(),
-});
-
-export type GameCreateFormFieldValues = z.infer<typeof gameCreateFormZodSchema>;
-
-const DEFAULT_VALUES = {
-  teamId: "",
-  date: "",
-  time: "",
-  place: "",
-  nbPlayers: 10,
-} satisfies GameCreateFormFieldValues;
+// const DEFAULT_VALUES = {
+//   teamId: "",
+//   date: "",
+//   time: "",
+//   place: "",
+//   nbPlayers: 10,
+// } satisfies GameCreateFormFieldValues;
 
 type GameCreateFormProps = {
   teams: { id: string; name: string }[];
@@ -37,66 +26,90 @@ type GameCreateFormProps = {
 
 export const GameCreateForm = ({ teams }: GameCreateFormProps) => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const { toastError } = useToaster();
+  // const [isPending, startTransition] = useTransition();
+  // const { toastError } = useToaster();
 
-  const methods = useForm<GameCreateFormFieldValues>({
-    resolver: zodResolver(gameCreateFormZodSchema),
-    defaultValues: DEFAULT_VALUES,
+  // const methods = useForm<GameCreateFormFieldValues>({
+  //   resolver: zodResolver(gameCreateFormZodSchema),
+  //   defaultValues: DEFAULT_VALUES,
+  // });
+
+  // const onSubmit = async (data: GameCreateFormFieldValues) => {
+  //   startTransition(async () => {
+  //     try {
+  //       const formData = new FormData();
+  //       formData.append("date", data.date);
+  //       formData.append("time", data.time);
+  //       formData.append("place", data.place);
+  //       formData.append("teamId", data.teamId);
+  //       formData.append("nbPlayers", data.nbPlayers.toString());
+
+  //       await gameCreateAction(formData);
+
+  //       router.push(PAGES.games.list.url);
+  //     } catch (error) {
+  //       toastError("Erreur lors de la création de l'équipe");
+  //     }
+  //   });
+  // };
+
+  // const { handleSubmit, control } = methods;
+
+  const [lastResult, action] = useFormState(gameCreateAction, undefined);
+  const [form, fields] = useForm({
+    // Sync the result of last submission
+    lastResult,
+
+    // Reuse the validation logic on the client
+    onValidate({ formData }) {
+      console.log("coucou");
+      return parseWithZod(formData, { schema: gameCreateSchema });
+    },
+
+    // onSubmit: (event, { formData }) => {
+    //   event.preventDefault();
+    //   // console.log("submited ok", formData);
+    // },
+
+    // Validate the form on blur event triggered
+    shouldValidate: "onSubmit",
+    shouldRevalidate: "onInput",
   });
 
-  const onSubmit = async (data: GameCreateFormFieldValues) => {
-    startTransition(async () => {
-      try {
-        const formData = new FormData();
-        formData.append("date", data.date);
-        formData.append("time", data.time);
-        formData.append("place", data.place);
-        formData.append("teamId", data.teamId);
-        formData.append("nbPlayers", data.nbPlayers.toString());
-
-        await gameCreateAction(formData);
-
-        router.push(PAGES.games.list.url);
-      } catch (error) {
-        toastError("Erreur lors de la création de l'équipe");
-      }
-    });
-  };
-
-  const { handleSubmit, control } = methods;
+  // console.log({ test: fields.test, z });
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        control={control}
-        name="teamId"
-        render={({
-          field: { onChange, value, name },
-          fieldState: { error },
-        }) => (
-          <FormField>
-            <FormField.Label htmlFor={name}>Date</FormField.Label>
-            <Select
-              id={name}
-              value={value}
-              onChange={onChange}
-              isOnError={!!error}
-            >
-              <option value="" disabled>
-                Choisissez une option
-              </option>
-              {teams.map(({ id, name }) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))}
-            </Select>
-            {error?.message && <FormField.Error label={error?.message} />}
-          </FormField>
+    <form action={action} {...getFormProps(form)}>
+      <FormField>
+        <FormField.Label htmlFor={fields.test.key}>Date</FormField.Label>
+        <Input
+          id={fields.test.key}
+          name={fields.test.name}
+          isOnError={!!fields.test.errors}
+        />
+        {fields.test.errors && fields.test.errors.length > 0 && (
+          <FormField.Error label={fields.test.errors[0]} />
         )}
-      />
-      <Controller
+      </FormField>
+      {/* <FormField>
+        <FormField.Label htmlFor={fields.date.key}>Date</FormField.Label>
+        <Select
+          id={fields.date.key}
+          name={fields.date.name}
+          isOnError={!!fields.date.errors}
+        >
+          <option value="" disabled>
+            Choisissez une option
+          </option>
+          {teams.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </Select> */}
+      {/* {Boolean(fields.date.errors?[0]) && <FormField.Error label={fields.date.errors[0]} />} */}
+      {/* </FormField> */}
+      {/* <Controller
         control={control}
         name="date"
         render={({
@@ -174,10 +187,8 @@ export const GameCreateForm = ({ teams }: GameCreateFormProps) => {
             {error?.message && <FormField.Error label={error?.message} />}
           </FormField>
         )}
-      />
-      <Button type="submit" isLoading={isPending}>
-        Ajouter le match
-      </Button>
+      /> */}
+      <SubmitButton> Ajouter le match</SubmitButton>
     </form>
   );
 };
