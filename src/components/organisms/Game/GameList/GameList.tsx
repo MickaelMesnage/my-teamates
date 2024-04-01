@@ -3,6 +3,7 @@ import { Card } from "@/src/components/atoms/Card";
 import { Section } from "@/src/components/atoms/Section";
 import { GameCreateButton } from "@/src/components/organisms/Game/GameCreate/GameCreateButton";
 import { NoGames } from "@/src/components/organisms/Game/GameList/NoGames";
+import { ParticipationSlider } from "@/src/components/organisms/Game/GameList/ParticipationSlider";
 import { getGameList } from "@/src/components/organisms/Game/GameList/getGameList";
 import { userConnectedGuard } from "@/src/guards/userConnectedGuard";
 import { twMerge } from "tailwind-merge";
@@ -47,6 +48,10 @@ export const GameList = async () => {
                     <Avatar key={participant.id} {...participant} />
                   ))}
                 </div>
+                <ParticipationSlider
+                  gameId={game.id}
+                  hasJoined={game.hasJoined}
+                />
               </div>
             </Card>
           ))}

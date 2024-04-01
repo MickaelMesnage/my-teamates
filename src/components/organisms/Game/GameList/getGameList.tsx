@@ -25,6 +25,8 @@ export const getGameList = async () => {
     },
   });
 
+  console.log(gameList);
+
   return gameList.map(({ participants, ...rest }) => ({
     ...rest,
     participants: participants.map(({ id, name, image }) => ({
@@ -32,5 +34,7 @@ export const getGameList = async () => {
       name: name || "John doe",
       image,
     })),
+    hasJoined: participants.some(({ id }) => id === user.id),
+    canJoined: !participants.some(({ id }) => id === user.id),
   }));
 };

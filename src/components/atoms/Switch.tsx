@@ -20,7 +20,7 @@ export const Switch = (props: SwitchProps) => {
           "w-12 h-8 rounded-full relative disabled:bg-opacity-50",
           checked
             ? "bg-brand-base hover:bg-brand-darker"
-            : "bg-background-button hover:bg-background-buttonPressed"
+            : "bg-gray-400 hover:bg-gray-600"
         )}
       >
         <SwitchPrimitive.Thumb

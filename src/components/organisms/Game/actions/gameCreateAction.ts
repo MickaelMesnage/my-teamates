@@ -19,12 +19,6 @@ export async function gameCreateAction(formData: FormData) {
     })
     .parse(Object.fromEntries(formData.entries()));
 
-  // if (!parsedData.success) {
-  //   throw new Error("Invalid form data");
-  // }
-
-  // const { date, time, place, nbPlayers, teamId } = parsedData.data;
-
   await prisma.game.create({
     data: {
       date: new Date(`${date}T${time}`),
@@ -38,5 +32,5 @@ export async function gameCreateAction(formData: FormData) {
     },
   });
 
-  revalidatePath(PAGES.teams.list.url);
+  revalidatePath(PAGES.games.list.url);
 }
