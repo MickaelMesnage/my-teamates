@@ -30,6 +30,7 @@ export default async function Page() {
             </p>
           </div>
         </Card>
+        <a href="https://dev.mimbi.io/ref">Test</a>
       </Shell>
     </main>
   );
